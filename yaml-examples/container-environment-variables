@@ -1,0 +1,26 @@
+#env variables can be created with "kubectl create configmap my-env --from-literal=example=github. 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+spec:
+  containers:
+  - name: busybox
+    image: busybox:latest
+    command: ["/bin/sh", "-c", "env"]
+    env:
+      - name: STUDENT_NAME
+        valueFrom:
+          configMapKeyRef:
+            name: container-env
+            key: STUDENT_NAME
+      - name: SCHOOL
+        valueFrom:
+          configMapKeyRef:
+            name: container-env
+            key: SCHOOL
+      - name: KUBERNETES
+        valueFrom:
+          configMapKeyRef:
+            name: container-env
+            key: KUBERNETES
